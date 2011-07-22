@@ -9,17 +9,17 @@
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" >
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10, 10, 10, 10">
-                <Image Source="/forismatic_logo.png" Stretch="Fill" />
+                <Image x:Name="logo" Source="/forismatic_logo.png" Stretch="Fill" MouseLeftButtonDown="LogoClicked" />
 
 
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
+                <Button Width="18" Height="18" Margin="0, 0, 0, 0" />
+                <Button Width="18" Height="18" Margin="0, 0, 0, 0" />
+                <Button Width="18" Height="18" Margin="0, 0, 0, 0" />
+                <Button x:Name="refreshButton" Width="18" Height="18" Margin="0, 0, 0, 0" Click="RefreshClicked" Content="R" />
             </StackPanel>
-
+ 
             <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
-                <TextBlock x:Name="quoteText" Foreground="Black" Text="This is a quote text is just for test proposes and may be this not corrent ablldlsd." TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
+                <TextBlock Name="quoteText" Foreground="Black" Text="This is a quote text is just for test proposes and may be this not corrent ablldlsd." TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
                 <TextBlock x:Name="quoteAuthor" Foreground="Gray" Margin="0, 5, 0, 0" Text="Vasily fomin" TextAlignment="Left" TextWrapping="Wrap" FontSize="16" FontFamily="Times New Roman" FontStyle="Italic" />
             </StackPanel>
         </StackPanel>
