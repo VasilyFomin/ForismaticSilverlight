@@ -4,11 +4,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Width="300"
-    Height="200">
+    Width="350"
+    Height="300" >
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" >
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Margin="10, 10, 10, 10">
+            <StackPanel Margin="10, 10, 10, 10" Orientation="Horizontal">
                 <Image x:Name="logo" Source="/forismatic_logo.png" Stretch="Fill" MouseLeftButtonDown="LogoClicked" />
 
 
@@ -17,11 +17,12 @@
                 <Button Width="18" Height="18" Margin="0, 0, 0, 0" />
                 <Button x:Name="refreshButton" Width="18" Height="18" Margin="0, 0, 0, 0" Click="RefreshClicked" Content="R" />
             </StackPanel>
- 
-            <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
-                <TextBlock Name="quoteText" Foreground="Black" Text="This is a quote text is just for test proposes and may be this not corrent ablldlsd." TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
-                <TextBlock x:Name="quoteAuthor" Foreground="Gray" Margin="0, 5, 0, 0" Text="Vasily fomin" TextAlignment="Left" TextWrapping="Wrap" FontSize="16" FontFamily="Times New Roman" FontStyle="Italic" />
+            
+            <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10" VerticalAlignment="Center">
+                <TextBlock Name="quoteText" Foreground="Black" TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
+                <TextBlock Name="quoteAuthor" Foreground="Gray" Margin="0, 5, 0, 0" TextAlignment="Left" TextWrapping="Wrap" FontSize="16" FontFamily="Times New Roman" FontStyle="Italic" />
             </StackPanel>
+
         </StackPanel>
-    </Border>
+        </Border>
 </UserControl>
