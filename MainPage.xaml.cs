@@ -18,7 +18,10 @@ namespace ForismaticGadget
     {
         private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
         private const string twitterShareUrl = "http://twitter.com/home?status=";
+        private const string m_FacebookShareUrl = "http://www.facebook.com/sharer.php?u=";
+
         private WebClient m_WebClient;
+        private Quote m_Quote;
 
         public MainPage()
         {
@@ -26,6 +29,8 @@ namespace ForismaticGadget
             m_WebClient = new WebClient();
             m_WebClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
             m_WebClient.DownloadStringAsync(new Uri(apiUrl));
+
+            m_Quote = new Quote();
         }                 
  
         private void LogoButton_Click(object sender, RoutedEventArgs e)
@@ -235,31 +240,54 @@ namespace ForismaticGadget
         {
             if (!e.Cancelled && e.Error == null)
             {
-                Quote receivedQuote = Quote.Parse(e.Result.ToString());
+                m_Quote = Quote.Parse(e.Result.ToString());
 
-                quoteText.Text = receivedQuote.Text;
-                if (receivedQuote.Author != String.Empty)
+                quoteText.Text = m_Quote.Text;
+                if (m_Quote.Author != String.Empty)
                 {
-                    quoteAuthor.Text = receivedQuote.Author;
+                    quoteAuthor.Text = m_Quote.Author;
                 }
-            }
+            }                        
         }
 
         
 
         private void facebookButton_Click(object sender, RoutedEventArgs e)
-        {            
-            
+        {
+            string facebookUrl = String.Empty;
+            if (m_Quote.Link != String.Empty)
+            {
+                facebookUrl = m_FacebookShareUrl + m_Quote.Link;
+            }
+            HtmlPage.Window.Navigate(new Uri(facebookUrl), "_blank");    
         }
 
         private void facebookButton_MouseEnter(object sender, MouseEventArgs e)
         {
+            BitmapImage img = new BitmapImage(new Uri("/facebook_button_focused.png", UriKind.Relative));
+            try
+            {
+                facebookImage.Source = img;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
         private void facebookButton_MouseLeave(object sender, MouseEventArgs e)
         {
+            BitmapImage img = new BitmapImage(new Uri("/facebook_button_normal.png", UriKind.Relative));
+            try
+            {
+                facebookImage.Source = img;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
         private void vkontakteButton_Click(object sender, RoutedEventArgs e)
@@ -269,12 +297,30 @@ namespace ForismaticGadget
 
         private void vkontakteButton_MouseEnter(object sender, MouseEventArgs e)
         {
+            BitmapImage img = new BitmapImage(new Uri("/vkontakte_button_focused.png", UriKind.Relative));
+            try
+            {
+                vkontakteImage.Source = img;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
         private void vkontakteButton_MouseLeave(object sender, MouseEventArgs e)
         {
+            BitmapImage img = new BitmapImage(new Uri("/vkontakte_button_normal.png", UriKind.Relative));
+            try
+            {
+                vkontakteImage.Source = img;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }      
     }
 }
