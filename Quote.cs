@@ -16,12 +16,12 @@ using System.Linq;
 namespace ForismaticGadget
 {
 	public class Quote 
-	{	
-		public String Text;
-	
-		public String Author;
+	{
+        public string Text { get; set; }
 
-		public String Link;
+        public string Author { get; set; }
+
+        public string Link { get; set; }
 	
 		public Quote () { }
 	
