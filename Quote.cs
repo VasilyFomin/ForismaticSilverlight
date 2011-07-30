@@ -10,6 +10,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.IO;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace ForismaticGadget
 {
@@ -31,37 +33,18 @@ namespace ForismaticGadget
 	
 		public static Quote Parse(String forsmaticResponseString)
 		{
-			Quote quote = new Quote();
+            XElement xml = XElement.Parse(forsmaticResponseString);
 
-			// Create an XmlReader
-			using (XmlReader reader = XmlReader.Create(new StringReader(forsmaticResponseString)))
-			{
-                while ( reader.Read() )
-                {
-                    if (reader.IsStartElement())
-                    {
-                        switch (reader.Name)
-                        {
-                            case "quoteText":
-                                reader.Read();
-                                quote.Text = reader.Value;
-                                break;
-                            
-                            case "quoteAuthor":
-                                reader.Read();
-                                quote.Author = reader.Value;
-                                break;
+            Quote quote = (from n in xml.Descendants("quote")
+                           select new Quote()
+                           {
+                               Text = n.Element("quoteText").Value,
+                               Author = n.Element("quoteAuthor").Value,
+                               Link = n.Element("quoteLink").Value,
+                           }).FirstOrDefault();
 
-                            case "quoteLink":
-                                reader.Read();
-                                quote.Link = reader.Value;
-                                break;                            
-                        }
-                    }
-                }               
-			}
-		
-			return quote;
+            return quote;
+
 		}
 
 		public override string ToString()
