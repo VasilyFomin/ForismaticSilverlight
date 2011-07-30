@@ -50,20 +50,7 @@ namespace ForismaticGadget
             {
 
                 throw;
-            }
-            string twitterUrl = String.Empty;
-            if (quoteAuthor.Text != String.Empty)
-            {
-                twitterUrl = String.Format("http://twitter.com/home?status={0}©{1}.{2}", HttpUtility.UrlEncode(quoteText.Text), HttpUtility.UrlEncode(quoteAuthor.Text), HttpUtility.UrlEncode("#forismatic") );
-                twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + "©" + quoteAuthor.Text + " #forismatic"); 
-                //HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");                
-            }
-            else if (quoteText.Text != String.Empty)
-            {
-                twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + " #forismatic"); 
-                //HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");    
-            }
-            HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");    
+            }          
         }
 
         private void twitterButton_MouseEnter(object sender, MouseEventArgs e)
@@ -105,13 +92,7 @@ namespace ForismaticGadget
             {
 
                 throw;
-            }
-
-            if (quoteAuthor.Text != String.Empty)
-            {
-                Uri wikiUri = new Uri(String.Format("http://ru.wikipedia.org/wiki/{0}", quoteAuthor.Text));
-                HtmlPage.Window.Navigate(wikiUri, "_blank");
-            }
+            }         
         }
 
         private void wikiButton_MouseEnter(object sender, MouseEventArgs e)
@@ -248,19 +229,59 @@ namespace ForismaticGadget
                 {
                     quoteAuthor.Text = m_Quote.Author;
                 }
+
+                // Set Twitter button Uri.
+                string twitterUrl = String.Empty;
+                if (quoteAuthor.Text != String.Empty)
+                {
+                    twitterUrl = String.Format("http://twitter.com/home?status={0}©{1}.{2}", HttpUtility.UrlEncode(quoteText.Text), HttpUtility.UrlEncode(quoteAuthor.Text), HttpUtility.UrlEncode("#forismatic") );
+                    twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + "©" + quoteAuthor.Text + " #forismatic"); 
+                }
+                else if (quoteText.Text != String.Empty)
+                {
+                    twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + " #forismatic"); 
+                }
+                twitterButton.NavigateUri = new Uri(twitterUrl);
+
+                // Set Facebook button Uri.
+                string facebookUrl = String.Empty;
+                if (m_Quote.Link != String.Empty)
+                {
+                    facebookUrl = m_FacebookShareUrl + m_Quote.Link;
+                }
+                facebookButton.NavigateUri = new Uri(facebookUrl);
+
+                // Set Vkontakte button Uri
+                string vkontakteUrl = String.Empty;
+                if (m_Quote.Link != String.Empty)
+                {
+                    if (m_Quote.Author != String.Empty)
+                    {
+                        vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text + "©" + m_Quote.Author);
+                    }
+                    else
+                    {
+                        vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text);
+                    }
+                }
+                vkontakteButton.NavigateUri = new Uri(vkontakteUrl);
+
+                // Set Wiki button Uri.
+                if (m_Quote.Author != String.Empty)
+                {
+                    wikiButton.NavigateUri = new Uri(String.Format("http://ru.wikipedia.org/wiki/{0}", quoteAuthor.Text));
+                    wikiButton.IsEnabled = true;
+                }
+                else
+                {
+                    wikiButton.IsEnabled = false;
+                }
             }                        
         }
-
         
-
         private void facebookButton_Click(object sender, RoutedEventArgs e)
         {
-            string facebookUrl = String.Empty;
-            if (m_Quote.Link != String.Empty)
-            {
-                facebookUrl = m_FacebookShareUrl + m_Quote.Link;
-            }
-            HtmlPage.Window.Navigate(new Uri(facebookUrl), "_blank");    
+          
         }
 
         private void facebookButton_MouseEnter(object sender, MouseEventArgs e)
@@ -293,20 +314,7 @@ namespace ForismaticGadget
 
         private void vkontakteButton_Click(object sender, RoutedEventArgs e)
         {
-            string vkontakteUrl = String.Empty;
-            if (m_Quote.Link != String.Empty)
-            {
-                if (m_Quote.Author != String.Empty)
-                {
-                    vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text + "©" + m_Quote.Author);
-                }
-                else
-                {
-                    vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text);
-                }
-                
-            }
-            HtmlPage.Window.Navigate(new Uri(vkontakteUrl), "_blank");  
+          
         }
 
         private void vkontakteButton_MouseEnter(object sender, MouseEventArgs e)
