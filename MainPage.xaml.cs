@@ -18,7 +18,11 @@ namespace ForismaticGadget
     {
         public MainPage()
         {
-            InitializeComponent();              
+            InitializeComponent();
+            WebClient webClient = new WebClient();            
+
+            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
+            webClient.DownloadStringAsync(new Uri(apiUrl));
         }                 
  
         private void LogoButton_Click(object sender, RoutedEventArgs e)
@@ -192,8 +196,7 @@ namespace ForismaticGadget
             }
 
             WebClient webClient = new WebClient();
-            string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
-
+           
             webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
             webClient.DownloadStringAsync(new Uri(apiUrl));
         }
@@ -237,6 +240,7 @@ namespace ForismaticGadget
             }
         }
 
+        private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
         
        
     }

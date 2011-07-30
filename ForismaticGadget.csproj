@@ -99,6 +99,8 @@
     <Content Include="copy_button_clicked.png" />
     <Content Include="copy_button_focused.png" />
     <Content Include="copy_button_normal.png" />
+    <Content Include="facebook_button_focused.png" />
+    <Content Include="facebook_button_normal.png" />
     <Content Include="forismatic_logo.png" />
     <Content Include="refresh_button_clicked.png" />
     <Content Include="refresh_button_focused.png" />
@@ -106,6 +108,8 @@
     <Content Include="twitter_button_clicked.png" />
     <Content Include="twitter_button_focused.png" />
     <Content Include="twitter_button_normal.png" />
+    <Content Include="vkontakte_button_focused.png" />
+    <Content Include="vkontakte_button_normal.png" />
     <Content Include="wiki_button_clicked.png" />
     <Content Include="wiki_button_focused.png" />
     <Content Include="wiki_button_normal.png" />

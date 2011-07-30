@@ -5,9 +5,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" >
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" VerticalAlignment="Top" HorizontalAlignment="Center" >
-        <Grid x:Name="LayoutRoot" Width="238" Height="250">
+        <Grid x:Name="LayoutRoot" Width="266" Height="250">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="98" />
+                <ColumnDefinition Width="28" />
                 <ColumnDefinition Width="28" />
                 <ColumnDefinition Width="28" />
                 <ColumnDefinition Width="28" />
@@ -34,41 +35,57 @@
                 </Style>
             </Grid.Resources>
 
+            <!-- Logo -->
             <Button Name="LogoButton" Width="88" Height="18" Grid.Row="0" Grid.Column="0" Margin="5" Style="{StaticResource customButtonStyle}" Click="LogoButton_Click" >
                 <Button.Content>
                     <Image Name="logoImage" Source="/forismatic_logo.png" Stretch="Fill"/>
                 </Button.Content>
             </Button>
-
-            <Button Name="twitterButton" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Margin="5" Style="{StaticResource customButtonStyle}" Click="twitterButton_Click" MouseEnter="twitterButton_MouseEnter" MouseLeave="twitterButton_MouseLeave" MouseLeftButtonUp="twitterButton_MouseLeave" >
+            
+            <!-- Twitter Button -->
+            <Button Name="twitterButton" Width="18" Height="18" Grid.Row="0" Grid.Column="1" Margin="5" Style="{StaticResource customButtonStyle}" Click="twitterButton_Click" MouseEnter="twitterButton_MouseEnter" MouseLeave="twitterButton_MouseLeave" MouseLeftButtonUp="twitterButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="twitterImage" Source="/twitter_button_normal.png" Stretch="Fill" />
                 </Button.Content>
             </Button>
 
-            <Button Name="wikiButton" Width="18" Height="18" Grid.Row="0" Grid.Column="3" Margin="5" Style="{StaticResource customButtonStyle}" Click="wikiButton_Click" MouseEnter="wikiButton_MouseEnter" MouseLeave="wikiButton_MouseLeave" MouseLeftButtonUp="wikiButton_MouseLeave" >
+            <!-- Facebook Button -->
+            <Button Name="facebookButton" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Margin="5" Style="{StaticResource customButtonStyle}" >
+                <Button.Content>
+                    <Image Name="facebookImage" Source="/facebook_button_normal.png" Stretch="Fill" />
+                </Button.Content>
+            </Button>
+
+            <!-- Vkontakte Button -->
+            <Button Name="vkontakteButton" Width="18" Height="18" Grid.Row="0" Grid.Column="3" Margin="5" Style="{StaticResource customButtonStyle}" >
+                <Button.Content>
+                    <Image Name="vkontakteImage" Source="/vkontakte_button_normal.png" Stretch="Fill" />
+                </Button.Content>
+            </Button>
+
+            <!-- Wiki Button-->
+            <Button Name="wikiButton" Width="18" Height="18" Grid.Row="0" Grid.Column="4" Margin="5" Style="{StaticResource customButtonStyle}" Click="wikiButton_Click" MouseEnter="wikiButton_MouseEnter" MouseLeave="wikiButton_MouseLeave" MouseLeftButtonUp="wikiButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="wikiImage" Source="/wiki_button_normal.png" Stretch="Fill" />
                 </Button.Content>
             </Button>
 
-            <Button Name="copyButton" Width="18" Height="18" Grid.Row="0" Grid.Column="4" Margin="5" Style="{StaticResource customButtonStyle}" Click="copyButton_Click" MouseEnter="copyButton_MouseEnter" MouseLeave="copyButton_MouseLeave" MouseLeftButtonUp="copyButton_MouseLeave" >
+            <!-- Copy Button -->
+            <Button Name="copyButton" Width="18" Height="18" Grid.Row="0" Grid.Column="5" Margin="5" Style="{StaticResource customButtonStyle}" Click="copyButton_Click" MouseEnter="copyButton_MouseEnter" MouseLeave="copyButton_MouseLeave" MouseLeftButtonUp="copyButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="copyImage" Source="/copy_button_normal.png" Stretch="Fill" />
                 </Button.Content>
             </Button>
 
-            <Button Name="refreshButton" Width="18" Height="18" Grid.Row="0" Grid.Column="5" Margin="5" Style="{StaticResource customButtonStyle}" Click="refreshButton_Click" MouseEnter="refreshButton_MouseEnter" MouseLeave="refreshButton_MouseLeave" MouseLeftButtonUp="refreshButton_MouseLeave" >
+            <!-- Refresh Button -->
+            <Button Name="refreshButton" Width="18" Height="18" Grid.Row="0" Grid.Column="6" Margin="5" Style="{StaticResource customButtonStyle}" Click="refreshButton_Click" MouseEnter="refreshButton_MouseEnter" MouseLeave="refreshButton_MouseLeave" MouseLeftButtonUp="refreshButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="refreshImage" Source="/refresh_button_normal.png" Stretch="Fill"/>
                 </Button.Content>
             </Button>            
-
-            <!--<Button Width="28" Height="28" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" />-->
-           <!-- <Image Name="refreshButton" Stretch="Fill" Source="/refresh_button_normal.png" Width="23" Height="32" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0, 10, 10, 10" MouseLeftButtonDown="RefreshClicked" MouseLeftButtonUp="RefreshButtonUp" MouseEnter="RefreshEnter" MouseLeave="RefreshLeave" />
-            <Image Name="wikiButton" Width="27" Height="28" Stretch="Fill" Source="/wiki_button_normal.png" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0, 10, 48, 10" />-->
-
-            <ScrollViewer Height="230" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6">
+            
+            <!-- ScrollViewer with Quote content. I'm using the custom template to avoid the border around the ScrollViewer. -->
+            <ScrollViewer Height="230" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7">
                 <ScrollViewer.Template>
                     <ControlTemplate TargetType="ScrollViewer">
                         <!--<Border CornerRadius="1" BorderBrush="#FFA4A4A4" BorderThickness="1">-->
