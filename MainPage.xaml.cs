@@ -19,6 +19,7 @@ namespace ForismaticGadget
         private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
         private const string twitterShareUrl = "http://twitter.com/home?status=";
         private const string m_FacebookShareUrl = "http://www.facebook.com/sharer.php?u=";
+        private const string m_VkontakteShareUrl = "http://vkontakte.ru/share.php?url=";
 
         private WebClient m_WebClient;
         private Quote m_Quote;
@@ -292,7 +293,20 @@ namespace ForismaticGadget
 
         private void vkontakteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string vkontakteUrl = String.Empty;
+            if (m_Quote.Link != String.Empty)
+            {
+                if (m_Quote.Author != String.Empty)
+                {
+                    vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text + "©" + m_Quote.Author);
+                }
+                else
+                {
+                    vkontakteUrl = m_VkontakteShareUrl + m_Quote.Link + "&title=" + HttpUtility.UrlEncode(m_Quote.Text) + "&description=" + HttpUtility.UrlEncode(m_Quote.Text);
+                }
+                
+            }
+            HtmlPage.Window.Navigate(new Uri(vkontakteUrl), "_blank");  
         }
 
         private void vkontakteButton_MouseEnter(object sender, MouseEventArgs e)
