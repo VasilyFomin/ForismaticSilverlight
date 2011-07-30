@@ -50,14 +50,14 @@
             </Button>
 
             <!-- Facebook Button -->
-            <Button Name="facebookButton" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Margin="5" Style="{StaticResource customButtonStyle}" >
+            <Button Name="facebookButton" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Margin="5" Style="{StaticResource customButtonStyle}" Click="facebookButton_Click" MouseEnter="facebookButton_MouseEnter" MouseLeave="facebookButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="facebookImage" Source="/facebook_button_normal.png" Stretch="Fill" />
                 </Button.Content>
             </Button>
 
             <!-- Vkontakte Button -->
-            <Button Name="vkontakteButton" Width="18" Height="18" Grid.Row="0" Grid.Column="3" Margin="5" Style="{StaticResource customButtonStyle}" >
+            <Button Name="vkontakteButton" Width="18" Height="18" Grid.Row="0" Grid.Column="3" Margin="5" Style="{StaticResource customButtonStyle}" Click="vkontakteButton_Click" MouseEnter="vkontakteButton_MouseEnter" MouseLeave="vkontakteButton_MouseLeave" >
                 <Button.Content>
                     <Image Name="vkontakteImage" Source="/vkontakte_button_normal.png" Stretch="Fill" />
                 </Button.Content>

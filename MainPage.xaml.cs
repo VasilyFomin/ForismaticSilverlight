@@ -16,13 +16,16 @@ namespace ForismaticGadget
 {
     public partial class MainPage : UserControl
     {
+        private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
+        private const string twitterShareUrl = "http://twitter.com/home?status=";
+        private WebClient m_WebClient;
+
         public MainPage()
         {
             InitializeComponent();
-            WebClient webClient = new WebClient();            
-
-            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
-            webClient.DownloadStringAsync(new Uri(apiUrl));
+            m_WebClient = new WebClient();
+            m_WebClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
+            m_WebClient.DownloadStringAsync(new Uri(apiUrl));
         }                 
  
         private void LogoButton_Click(object sender, RoutedEventArgs e)
@@ -42,16 +45,19 @@ namespace ForismaticGadget
 
                 throw;
             }
+            string twitterUrl = String.Empty;
             if (quoteAuthor.Text != String.Empty)
             {
-                Uri twitterShareUri = new Uri(String.Format("http://twitter.com/home?status={0}©{1}.%23forismatic", quoteText.Text, quoteAuthor.Text));
-                HtmlPage.Window.Navigate(twitterShareUri, "_blank");                
+                twitterUrl = String.Format("http://twitter.com/home?status={0}©{1}.{2}", HttpUtility.UrlEncode(quoteText.Text), HttpUtility.UrlEncode(quoteAuthor.Text), HttpUtility.UrlEncode("#forismatic") );
+                twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + "©" + quoteAuthor.Text + " #forismatic"); 
+                //HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");                
             }
             else if (quoteText.Text != String.Empty)
             {
-                Uri twitterShareUri = new Uri(String.Format("http://twitter.com/home?status={0}%23forismatic", quoteText.Text));
-                HtmlPage.Window.Navigate(twitterShareUri, "_blank");
+                twitterUrl = twitterShareUrl + HttpUtility.UrlEncode(quoteText.Text + " #forismatic"); 
+                //HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");    
             }
+            HtmlPage.Window.Navigate(new Uri(twitterUrl), "_blank");    
         }
 
         private void twitterButton_MouseEnter(object sender, MouseEventArgs e)
@@ -193,12 +199,8 @@ namespace ForismaticGadget
             {
 
                 throw;
-            }
-
-            WebClient webClient = new WebClient();
-           
-            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
-            webClient.DownloadStringAsync(new Uri(apiUrl));
+            }            
+            m_WebClient.DownloadStringAsync(new Uri(apiUrl));
         }
 
         private void refreshButton_MouseEnter(object sender, MouseEventArgs e)
@@ -236,12 +238,43 @@ namespace ForismaticGadget
                 Quote receivedQuote = Quote.Parse(e.Result.ToString());
 
                 quoteText.Text = receivedQuote.Text;
-                quoteAuthor.Text = receivedQuote.Author;
+                if (receivedQuote.Author != String.Empty)
+                {
+                    quoteAuthor.Text = receivedQuote.Author;
+                }
             }
         }
 
-        private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
         
-       
+
+        private void facebookButton_Click(object sender, RoutedEventArgs e)
+        {            
+            
+        }
+
+        private void facebookButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void facebookButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void vkontakteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void vkontakteButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void vkontakteButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }      
     }
 }
