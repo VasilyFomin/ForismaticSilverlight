@@ -3,25 +3,130 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Width="300"
-    Height="200">
-    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" >
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Margin="10, 10, 10, 10">
-                <Image Source="/forismatic_logo.png" Stretch="Fill" />
+    mc:Ignorable="d" >
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="6" VerticalAlignment="Top" HorizontalAlignment="Center" >
+        <Grid x:Name="LayoutRoot" Width="238" Height="250">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="98" />
+                <ColumnDefinition Width="28" />
+                <ColumnDefinition Width="28" />
+                <ColumnDefinition Width="28" />
+                <ColumnDefinition Width="28" />
+                <ColumnDefinition Width="28" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style x:Key="customButtonStyle" TargetType="Button">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+
+            <Button Name="LogoButton" Width="88" Height="18" Grid.Row="0" Grid.Column="0" Margin="5" Style="{StaticResource customButtonStyle}" Click="LogoButton_Click" >
+                <Button.Content>
+                    <Image Name="logoImage" Source="/forismatic_logo.png" Stretch="Fill"/>
+                </Button.Content>
+            </Button>
+
+            <Button Name="twitterButton" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Margin="5" Style="{StaticResource customButtonStyle}" Click="twitterButton_Click" MouseEnter="twitterButton_MouseEnter" MouseLeave="twitterButton_MouseLeave" MouseLeftButtonUp="twitterButton_MouseLeave" >
+                <Button.Content>
+                    <Image Name="twitterImage" Source="/twitter_button_normal.png" Stretch="Fill" />
+                </Button.Content>
+            </Button>
+
+            <Button Name="wikiButton" Width="18" Height="18" Grid.Row="0" Grid.Column="3" Margin="5" Style="{StaticResource customButtonStyle}" Click="wikiButton_Click" MouseEnter="wikiButton_MouseEnter" MouseLeave="wikiButton_MouseLeave" MouseLeftButtonUp="wikiButton_MouseLeave" >
+                <Button.Content>
+                    <Image Name="wikiImage" Source="/wiki_button_normal.png" Stretch="Fill" />
+                </Button.Content>
+            </Button>
+
+            <Button Name="copyButton" Width="18" Height="18" Grid.Row="0" Grid.Column="4" Margin="5" Style="{StaticResource customButtonStyle}" Click="copyButton_Click" MouseEnter="copyButton_MouseEnter" MouseLeave="copyButton_MouseLeave" MouseLeftButtonUp="copyButton_MouseLeave" >
+                <Button.Content>
+                    <Image Name="copyImage" Source="/copy_button_normal.png" Stretch="Fill" />
+                </Button.Content>
+            </Button>
+
+            <Button Name="refreshButton" Width="18" Height="18" Grid.Row="0" Grid.Column="5" Margin="5" Style="{StaticResource customButtonStyle}" Click="refreshButton_Click" MouseEnter="refreshButton_MouseEnter" MouseLeave="refreshButton_MouseLeave" MouseLeftButtonUp="refreshButton_MouseLeave" >
+                <Button.Content>
+                    <Image Name="refreshImage" Source="/refresh_button_normal.png" Stretch="Fill"/>
+                </Button.Content>
+            </Button>            
+
+            <!--<Button Width="28" Height="28" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10" />-->
+           <!-- <Image Name="refreshButton" Stretch="Fill" Source="/refresh_button_normal.png" Width="23" Height="32" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0, 10, 10, 10" MouseLeftButtonDown="RefreshClicked" MouseLeftButtonUp="RefreshButtonUp" MouseEnter="RefreshEnter" MouseLeave="RefreshLeave" />
+            <Image Name="wikiButton" Width="27" Height="28" Stretch="Fill" Source="/wiki_button_normal.png" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0, 10, 48, 10" />-->
+
+            <ScrollViewer Height="230" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6">
+                <ScrollViewer.Template>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <!--<Border CornerRadius="1" BorderBrush="#FFA4A4A4" BorderThickness="1">-->
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Grid.Column="1" Grid.Row="1" Fill="#FFE9E9E9" />
+                            <!-- Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" -->
+                            <ScrollContentPresenter
+                          x:Name="ScrollContentPresenterElement"
+                          Grid.Column="0"
+                          Grid.Row="0"
+                          Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Cursor="{TemplateBinding Cursor}"                
+                          Margin="{TemplateBinding Padding}" />
+                            <ScrollBar
+                          x:Name="VerticalScrollBarElement"
+                          Grid.Column="1"
+                          Grid.Row="0"
+                          Orientation="Vertical"
+                          Cursor="Arrow"
+                          Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                          ViewportSize="{TemplateBinding ViewportHeight}"
+                          Minimum="0"
+                          Maximum="{TemplateBinding ScrollableHeight}"
+                          Value="{TemplateBinding VerticalOffset}" 
+                          Width="18"/>
+                            <ScrollBar
+                          x:Name="HorizontalScrollBarElement"
+                          Grid.Column="0"
+                          Grid.Row="1"
+                          Orientation="Horizontal"
+                          Cursor="Arrow"
+                          Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                          ViewportSize="{TemplateBinding ViewportWidth}"
+                          Minimum="0"
+                          Maximum="{TemplateBinding ScrollableWidth}"
+                          Value="{TemplateBinding HorizontalOffset}" 
+                          Height="18"/>
+                        </Grid>
+                        <!--</Border>-->
+                    </ControlTemplate>
+                </ScrollViewer.Template>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Name="quoteText" Foreground="Black" Margin="10" TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
+                    <TextBlock Name="quoteAuthor" Foreground="Gray" Margin="10, 5, 10, 10" TextAlignment="Left" TextWrapping="Wrap" FontSize="16" FontFamily="Times New Roman" FontStyle="Italic" />
+                </StackPanel>
+            </ScrollViewer>
 
 
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-                <Button Width="28" Height="28" Margin="0, 0, 0, 0" HorizontalAlignment="Right" />
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" Margin="10, 10, 10, 10">
-                <TextBlock x:Name="quoteText" Foreground="Black" Text="This is a quote text is just for test proposes and may be this not corrent ablldlsd." TextAlignment="Left" TextWrapping="Wrap" FontSize="18" FontFamily="Times New Roman" />
-                <TextBlock x:Name="quoteAuthor" Foreground="Gray" Margin="0, 5, 0, 0" Text="Vasily fomin" TextAlignment="Left" TextWrapping="Wrap" FontSize="16" FontFamily="Times New Roman" FontStyle="Italic" />
-            </StackPanel>
-        </StackPanel>
+        </Grid>
     </Border>
+
 </UserControl>
