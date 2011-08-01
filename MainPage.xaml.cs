@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -16,7 +17,7 @@ namespace ForismaticGadget
 {
     public partial class MainPage : UserControl
     {
-        private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&format=xml&lang=ru";
+        private const string apiUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=ru&format=xml";
         private const string twitterShareUrl = "http://twitter.com/home?status=";
         private const string m_FacebookShareUrl = "http://www.facebook.com/sharer.php?u=";
         private const string m_VkontakteShareUrl = "http://vkontakte.ru/share.php?url=";
@@ -27,9 +28,19 @@ namespace ForismaticGadget
         public MainPage()
         {
             InitializeComponent();
+            
+            // Create WebClient and get first data
             m_WebClient = new WebClient();
+            m_WebClient.BaseAddress = "http://api.forismatic.com/api/1.0/";
+             
             m_WebClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(ReadAnswer);
-            m_WebClient.DownloadStringAsync(new Uri(apiUrl));
+
+            // Random to generate random key
+            Random random = new Random();
+            m_WebClient.DownloadStringAsync(new Uri(apiUrl + "&key=" + random.Next(999999) ));
+
+            // Disable refresh button during get new data
+            refreshButton.IsEnabled = false;
 
             m_Quote = new Quote();
         }                 
@@ -186,8 +197,9 @@ namespace ForismaticGadget
             {
 
                 throw;
-            }            
-            m_WebClient.DownloadStringAsync(new Uri(apiUrl));
+            }
+            Random random = new Random();
+            m_WebClient.DownloadStringAsync(new Uri(apiUrl + "&key=" + random.Next(999999)));           
         }
 
         private void refreshButton_MouseEnter(object sender, MouseEventArgs e)
@@ -276,7 +288,10 @@ namespace ForismaticGadget
                 {
                     wikiButton.IsEnabled = false;
                 }
-            }                        
+            }     
+            
+            // Enable Refresh button
+            refreshButton.IsEnabled = true;
         }
         
         private void facebookButton_Click(object sender, RoutedEventArgs e)
